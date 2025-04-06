@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Ignore generated files
+data/
+*.txt
+*.bin
+*.tsv
+
 # C extensions
 *.so
 
