@@ -30,30 +30,28 @@ def encode_ngram_model(train_file, output_model_file, n, lang_mapping_file):
 
     Model file format:
     <class_id> <ngram> <count>
-
-    Parameters:
-      train_file (str): Path to the training TSV file.
-      output_model_file (str): Path to the output model file.
-      n (int): n-gram length.
-      lang_mapping_file (str): Path to the JSON file with language mapping.
     """
     lang_mapping = load_language_mapping(lang_mapping_file)
     model_counts = collections.defaultdict(int)
 
     with open(train_file, "r", encoding="utf-8") as f:
-        reader = csv.reader(f, delimiter="\t")
-        for row in reader:
-            if len(row) < 3:
+        for line in f:
+            line = line.rstrip("\n")
+            parts = line.split("\t")
+            if len(parts) < 3:
+                print(f"Warning: line '{line}' does not have enough parts; skipping.")
                 continue
-            lang_code = row[1].strip()
-            sentence = row[2].strip()
+            lang_code = parts[1].strip()
+            sentence = " ".join(parts[2:]).strip()
             if not sentence:
+                print(f"Warning: empty sentence in line '{line}'; skipping.")
                 continue
             if lang_code not in lang_mapping:
                 print(f"Warning: language code '{lang_code}' not in mapping; skipping.")
                 continue
             class_id = lang_mapping[lang_code]
-            # Add (n-1) start and end tokens.
+
+            # Add (n-1) start and end tokens
             start_tokens = " ".join(["<s>"] * (n - 1))
             end_tokens = " ".join(["</s>"] * (n - 1))
             sentence = f"{start_tokens} {sentence} {end_tokens}"
