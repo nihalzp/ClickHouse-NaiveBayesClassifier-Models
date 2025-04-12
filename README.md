@@ -57,12 +57,14 @@ python3 create_ngram_model_token.py train.tsv lang_token_1.bin 1 class_id.json
 Creates a serialized binary model file for `codepoint` mode to be used by ClickHouse.
 
 Same as `create_ngram_model_token.py`, but for `codepoint` mode.
+
 ---
 
 ### `create_ngram_model_byte.py`
 Creates a serialized binary model file for `byte` mode to be used by ClickHouse.
 
 Same as `create_ngram_model_token.py`, but for `byte` mode.
+
 ---
 
 ### `evaluate_predictions.py`
