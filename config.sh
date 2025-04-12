@@ -1,3 +1,3 @@
-# Update the path to your ClickHouse client
+# Update the path to your ClickHouse client. It is assumed that the server is already running with the required config files.
 
-LICKHOUSE_CLIENT="./clickhouse-client"
+CLICKHOUSE_CLIENT="./clickhouse-client"
