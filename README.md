@@ -1,4 +1,4 @@
-# ch-nb-accuracy-test
+# ClickHouse-NaiveBayesClassifier-Models
 
 ## Data Attribution
 
